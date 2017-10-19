@@ -3,22 +3,22 @@
     {
       "title": "title1",
       "date": "2017-10-6",
-      "isDone": false
+      "isDone": "false"
     },
     {
       "title": "title2",
       "date": "2017-10-15",
-      "isDone": true
+      "isDone": "true"
     },
     {
       "title": "title3 some text",
       "date": "2017-10-20",
-      "isDone": false
+      "isDone": "false"
     },
     {
       "title": "title4",
       "date": "2017-11-1",
-      "isDone": false
+      "isDone": "false"
     }
   ]
 }
