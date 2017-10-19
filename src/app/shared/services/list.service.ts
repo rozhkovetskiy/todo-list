@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { ListModel } from '../models/list.model';
+import { TaskModel } from '../models/task.model';
 
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
@@ -12,7 +12,7 @@ export class ListService {
 
   constructor(private http: Http) { }
 
-  getList(): Observable<ListModel[]> {
+  getList(): Observable<TaskModel[]> {
     return this.http.get('/assets/mock-api/list.json')
       .map(response => response.json().items);
   }

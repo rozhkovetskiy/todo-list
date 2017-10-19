@@ -1,0 +1,17 @@
+.task-title {
+  padding-left: 5px;
+  display: inline;
+}
+
+.task-title-underline {
+  text-decoration: line-through;
+}
+
+.icon-block {
+  float: right;
+  padding-right: 5px;
+}
+
+.pencil-icon {
+  padding-right: 5px;
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListModel } from '../shared/models/list.model';
+import { TaskModel } from '../shared/models/task.model';
 import { ListService } from '../shared/services/list.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ListService } from '../shared/services/list.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  list: ListModel[] = [];
+  list: TaskModel[] = [];
 
   constructor( private listService: ListService) { }
 
