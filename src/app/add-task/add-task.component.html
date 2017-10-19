@@ -1,15 +1,18 @@
-<div class="row mb-2">
-  <div class="col-md-8 col-lg-8">
-    <div class="input-group">
-      <input type="text" class="form-control w-75" aria-label="Text input with segmented button dropdown">
-      <input class="form-control w-25" placeholder="yyyy-mm-dd"
-             name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
-      <div class="input-group-btn">
-        <button class="btn pointer" (click)="d.toggle()" type="button">
-          <i class="fa fa-calendar" aria-hidden="true"></i>
-        </button>
-        <button class="btn">Add task</button>
+<div class="container">
+  <div class="row mb-2">
+    <div class="col-md-8 col-lg-8">
+      <div class="input-group">
+        <input type="text" class="form-control w-75" aria-label="Text input with segmented button dropdown">
+        <input class="form-control w-25" placeholder="yyyy-mm-dd"
+               name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+        <div class="input-group-btn">
+          <button class="btn pointer" (click)="d.toggle()" type="button">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </button>
+          <button class="btn">Add task</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
+

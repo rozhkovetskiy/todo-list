@@ -1,24 +1,17 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-12 col-lg-12">
-        <h1>Todo List</h1>
-      </div>
-    </div>
-</div>
-<div class="container">
   <div class="row">
-      <div class="col-md-8 col-lg-8" >
-        <ul class="list-group" *ngFor="let task of list">
-          <li class="list-group-item">
-            <h6>{{task.date}}</h6>
-            <input type="checkbox" [(ngModel)]="task.isDone">
-            <div class="task-title" [ngClass]="{'task-title-underline': task.isDone}">{{task.title}}</div>
-            <div class="icon-block">
-              <i class="fa fa-pencil pencil-icon" aria-hidden="true"></i>
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </div>
-          </li>
-        </ul>
-      </div>
+    <div class="col-md-8 col-lg-8" >
+      <ul class="list-group" *ngFor="let task of list">
+        <li class="list-group-item">
+          <h6>{{task.date}}</h6>
+          <input type="checkbox" [(ngModel)]="task.isDone">
+          <div class="task-title" [ngClass]="{'task-title-underline': task.isDone}">{{task.title}}</div>
+          <div class="icon-block">
+            <i class="fa fa-pencil pencil-icon" aria-hidden="true"></i>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

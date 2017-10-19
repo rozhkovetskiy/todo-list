@@ -16,7 +16,7 @@ export class ListService {
     return this.http.get('/assets/mock-api/list.json')
       .map(response => response.json().items);
   }
-
+  
   private handleError(error: any): Promise<any> {
     console.log('An error occurred', error);
     return Promise.reject(error.message || error);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-task',
