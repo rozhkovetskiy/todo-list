@@ -1,14 +1,22 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-lg-8" >
-      <ul class="list-group" *ngFor="let task of list">
+      <ul class="list-group" *ngFor="let task of list; let index = index">
         <li class="list-group-item">
-          <h6>{{task.date}}</h6>
+          <h6>{{task.date| date:"MM/dd/yyyy" }}</h6>
           <input type="checkbox" [(ngModel)]="task.isDone">
-          <div class="task-title" [ngClass]="{'task-title-underline': task.isDone}">{{task.title}}</div>
+          <div *ngIf="editting.id !== task.id" class="task-title" [ngClass]="{'task-title-underline': task.isDone}">
+            {{task.title}}
+          </div>
+          <input *ngIf="editting.id === task.id" type="text" class="task-title" [(ngModel)]="task.title">
           <div class="icon-block">
-            <i class="fa fa-pencil pencil-icon" aria-hidden="true"></i>
-            <i class="fa fa-trash" aria-hidden="true"></i>
+            <div *ngIf="editting.id === task.id" class="editting-block">
+              <i class="fa fa-check pointer" aria-hidden="true" (click)="applyChanges()"></i>
+              <i class="fa fa-times pointer" aria-hidden="true" (click)="discardChanges()"></i>
+            </div>
+            <i *ngIf="editting.id !== task.id" class="fa fa-pencil pencil-icon pointer" aria-hidden="true"
+               (click)="changeTask(task.id)"></i>
+            <i class="fa fa-trash pointer" (click)="deleteTask(index)" aria-hidden="true"></i>
           </div>
         </li>
       </ul>
