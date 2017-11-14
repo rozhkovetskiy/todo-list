@@ -15,8 +15,8 @@ export class ListService {
   constructor(private http: Http) { }
 
   getList(): Observable<TaskModel[]> {
-    return this.http.get('/assets/mock-api/list.json')
-      .map(response => this.data = response.json().items);
+    return this.http.get('/api/tasks')
+      .map(response => this.data = response.json());
   }
 
   reformatToDates(): any {
