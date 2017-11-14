@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskModel } from '../shared/models/task.model';
 import { ListService } from '../shared/services/list.service';
-import { DatePipe } from '@angular/common';
 import * as _ from 'lodash';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -11,12 +11,16 @@ import * as _ from 'lodash';
 })
 export class ListComponent implements OnInit {
   list: TaskModel[] = [];
+  id: number;
   private editting: {
     tempTitle: string,
     id: number
   } = { tempTitle: '', id: null };
 
-  constructor( private listService: ListService) { }
+  constructor(
+    private listService: ListService,
+    private route: ActivatedRoute
+  ) { }
 
   getList(): void {
     this.listService
@@ -44,6 +48,9 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
+    this.route.params.subscribe(params => {
+      this.id = params['date'];
+    });
   }
 
 }

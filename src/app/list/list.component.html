@@ -1,9 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-lg-8" >
+      <pre>{{index}}</pre>
       <ul class="list-group" *ngFor="let task of list; let index = index">
-        <li class="list-group-item">
-          <h6>{{task.date| date:"MM/dd/yyyy" }}</h6>
+        <li class="list-group-item" [routerLink]="['/list/'+id+'/task',task.id]">
+          <h6>{{task.date| date:"dd/MM/yyyy" }}</h6>
           <input type="checkbox" [(ngModel)]="task.isDone">
           <div *ngIf="editting.id !== task.id" class="task-title" [ngClass]="{'task-title-underline': task.isDone}">
             {{task.title}}

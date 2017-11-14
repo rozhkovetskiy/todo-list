@@ -16,10 +16,19 @@ export class ListService {
 
   getList(): Observable<TaskModel[]> {
     return this.http.get('/assets/mock-api/list.json')
-      .map(response => {
-        this.data = response.json().items;
-        return this.data;
-      });
+      .map(response => this.data = response.json().items);
+  }
+
+  reformatToDates(): any {
+    return _.groupBy(this.data, 'date');
+  }
+
+  getAllDates(): any {
+    return _.uniqWith(_.map(this.data, 'date'));
+  }
+
+  getData() {
+    return this.data;
   }
 
   addTask(elem): void {
@@ -29,6 +38,13 @@ export class ListService {
   deleteTask(item): void {
     _.pull(this.data, item);
   }
+  // https://stackoverflow.com/questions/40774697/how-to-group-array-of-objects-by-key
+  // getAllDates(): any {
+  //   // this.getList().subscribe(() => {
+  //     console.log('list when calling getAllDates from service:' + this.data);
+  //     return _.groupBy(this.data, 'date');
+  //   // });
+  // }
 
   private handleError(error: any): Promise<any> {
     console.log('An error occurred', error);

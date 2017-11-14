@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" class="btn btn-primary mb-1 float-right" [routerLink]="['/add']">Add task</button>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngFor="let date of dates; let index = index" class="col-md-3 text-center">
+      <button type="button" class="btn btn-success mb-2" [routerLink]="['/tasks', index]">
+        {{date |  date:"dd/MM/yyyy"}}</button>
+    </div>
+  </div>
+</div>

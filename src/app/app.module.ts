@@ -1,23 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 
+import { AppRoutingModule } from './app-routing.module';
+
 import { ListService } from './shared/services/list.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { TaskComponent } from './task/task.component';
 
 @NgModule({
   declarations: [
     AddTaskComponent,
     AppComponent,
-    ListComponent
+    ListComponent,
+    DashboardComponent,
+    TaskComponent
   ],
   imports: [
+    AppRoutingModule,
     FormsModule,
     BrowserModule,
     HttpModule,
