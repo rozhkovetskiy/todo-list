@@ -44,8 +44,8 @@ export class AddTaskComponent implements OnInit {
     this.newTask = new TaskModel;
   }
 
-  private getDateInUTC(date): number {
-    return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+  private getDateInUTC(date): string {
+    return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())).toString();
   }
 
 

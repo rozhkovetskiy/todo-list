@@ -1,7 +1,7 @@
 export class TaskModel {
   id: number;
   title: string;
-  date: number;
+  date: string;
   isDone: boolean;
 
   constructor(data: any = {}) {
@@ -11,8 +11,8 @@ export class TaskModel {
     this.isDone = data.isDone || false;
   }
 
-  getCurrentDateInUTC(): number {
+  getCurrentDateInUTC(): string {
     const date = new Date();
-    return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+    return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())).toString();
   }
 }
