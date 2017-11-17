@@ -12,10 +12,14 @@
   padding-right: 5px;
 }
 
-.editting-block {
+.editing-block {
   display: inline;
 }
 
 .pencil-icon {
   padding-right: 5px;
+}
+
+div+div {
+  border-top: none;
 }

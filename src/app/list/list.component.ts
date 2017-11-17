@@ -12,7 +12,7 @@ import {ActivatedRoute} from '@angular/router';
 export class ListComponent implements OnInit {
   list: TaskModel[] = [];
   id: number;
-  private editting: {
+  private editing: {
     tempTitle: string,
     id: number
   } = { tempTitle: '', id: null };
@@ -28,29 +28,39 @@ export class ListComponent implements OnInit {
       .subscribe(list => this.list = list);
   }
 
-  changeTask(id: number): void {
-    this.editting.id = id;
-    this.editting.tempTitle = this.list[_.findIndex(this.list, {'id': id})].title;
+  getListFromDate(date) {
+    this.listService
+      .getList()
+      .subscribe(() => this.list = this.listService.getListFromDate(date) );
   }
 
-  applyChanges(): void {
-    this.editting.id = null;
-  }
-
-  discardChanges(): void {
-    this.list[_.findIndex(this.list, {'id': this.editting.id})].title = this.editting.tempTitle;
-    this.editting.id = null;
-  }
-
-  deleteTask(index: number) {
-    this.listService.deleteTask(this.list[index]);
-  }
+// changeTask(id: number): void {
+  //   this.editing.id = id;
+  //   this.editing.tempTitle = this.list[_.findIndex(this.list, {'id': id})].title;
+  // }
+  //
+  // applyChanges(): void {
+  //   this.editing.id = null;
+  // }
+  //
+  // discardChanges(): void {
+  //   this.list[_.findIndex(this.list, {'id': this.editing.id})].title = this.editing.tempTitle;
+  //   this.editing.id = null;
+  // }
+  //
+  // deleteTask(index: number) {
+  //   this.listService.deleteTask(this.list[index]);
+  // }
 
   ngOnInit() {
-    this.getList();
-    this.route.params.subscribe(params => {
-      this.id = params['date'];
-    });
+    this.route.queryParams
+      .subscribe(params => {
+        if (params.date) {
+          this.getListFromDate(params.date);
+        } else {
+          this.getList();
+        }
+      });
   }
 
 }

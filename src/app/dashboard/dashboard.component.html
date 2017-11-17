@@ -1,13 +1,29 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <button type="button" class="btn btn-primary mb-1 float-right" [routerLink]="['/add']">Add task</button>
+  <!--add task-->
+  <div class="row mb-2">
+    <div class="col-md-10 offset-md-2">
+      <app-add-task></app-add-task>
     </div>
   </div>
+
   <div class="row">
-    <div *ngFor="let date of dates; let index = index" class="col-md-3 text-center">
-      <button type="button" class="btn btn-success mb-2" [routerLink]="['/tasks', index]">
-        {{date |  date:"dd/MM/yyyy"}}</button>
+    <!-- dates -->
+    <div class="col-md-2 col-lg-2">
+      <div class="mb-2">
+        <button type="button" class="btn btn-success w-100" [routerLink]="['/']">
+          All tasks
+        </button>
+      </div>
+      <div class="mb-2" *ngFor="let date of dates">
+        <button type="button" class="btn btn-success w-100"
+          [routerLink]="['/']" [queryParams]="{date: transformDate(date)}">
+          {{date |  date:"dd/MM/yyyy"}}
+        </button>
+      </div>
+    </div>
+    <!-- tasks -->
+    <div class="col-md-10 col-lg-10">
+      <app-list></app-list>
     </div>
   </div>
 </div>

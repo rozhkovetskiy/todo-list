@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ListService } from '../shared/services/list.service';
 import { TaskModel } from '../shared/models/task.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
@@ -12,13 +12,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-task.component.css']
 })
 
-export class AddTaskComponent implements OnInit, OnChanges {
+export class AddTaskComponent implements OnInit {
   bsConfig: Partial<BsDatepickerConfig>;
   newTask: TaskModel = new TaskModel();
-  minDate = new Date(2000, 0, 1);
+  minDate = new Date();
   maxDate = new Date(2099, 11, 31);
   addTaskForm: FormGroup;
-  titleCheck: boolean;
 
   constructor(
     private listService: ListService,
@@ -34,17 +33,20 @@ export class AddTaskComponent implements OnInit, OnChanges {
     });
   }
   ngOnInit() {
-    this.bsConfig = Object.assign({}, {containerClass: 'theme-orange'});
+    this.bsConfig = Object.assign({}, {containerClass: 'theme-green'});
   }
 
-  ngOnChanges() { }
-
   addTask(task) {
+    this.newTask.title = task.title;
+    this.newTask.date = this.getDateInUTC(task.date);
     this.listService
       .addTask(this.newTask);
     this.newTask = new TaskModel;
   }
 
+  private getDateInUTC(date): number {
+    return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+  }
 
 
 

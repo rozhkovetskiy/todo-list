@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {TaskModel} from '../shared/models/task.model';
 import {ListService} from '../shared/services/list.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-dates',
@@ -10,19 +11,23 @@ import {ListService} from '../shared/services/list.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  dates: string[];
+  dates: Date[];
   list: TaskModel[] = [];
-  date: Date = new Date(2017, 12, 24);
 
-  constructor(private listService: ListService) { }
+  constructor(private listService: ListService,
+              private datePipe: DatePipe) { }
 
-  getList(): void {
+  getAllDates(): void {
     this.listService
       .getList()
       .subscribe(() => this.dates = this.listService.getAllDates());
   }
 
   ngOnInit() {
-    this.getList();
+    this.getAllDates();
+  }
+
+  transformDate(date) {
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 }

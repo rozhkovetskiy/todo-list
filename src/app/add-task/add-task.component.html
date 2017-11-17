@@ -1,33 +1,13 @@
-<div class="container">
-  <div class="row mb-2">
-    <div class="col-md-8 col-lg-8">
-      <form [formGroup]="addTaskForm">
-        <div class="input-group">
-          <input type="text" class="form-control w-75" formControlName="title" placeholder="type task here..."
-          [class.is-invalid]="addTaskForm.get('title').hasError('required') && addTaskForm.get('title').dirty">
-          <input type="text" class="form-control w-25" formControlName="date" bsDatepicker
-                 [class.is-invalid]="addTaskForm.get('date').hasError('required')"
-                 [minDate]="minDate" [maxDate]="maxDate" [bsConfig]="bsConfig">
-          <div class="input-group-btn">
-            <button [disabled]="!addTaskForm.valid" class="btn pointer" (click)="addTask(addTaskForm.value)">Add task</button>
-          </div>
-        </div>
-      </form>
+<form [formGroup]="addTaskForm">
+  <div class="input-group">
+    <input type="text" class="form-control w-75" formControlName="title" placeholder="type task here..."
+    [class.is-invalid]="addTaskForm.get('title').hasError('required') && addTaskForm.get('title').dirty">
+    <input type="text" class="form-control w-25" formControlName="date" bsDatepicker
+           [class.is-invalid]="addTaskForm.get('date').hasError('required')"
+           [minDate]="minDate" [maxDate]="maxDate" [bsConfig]="bsConfig">
+    <div class="input-group-btn">
+      <button [disabled]="!addTaskForm.valid" class="btn btn-info pointer" (click)="addTask(addTaskForm.value)">Add task</button>
     </div>
   </div>
-</div>
+</form>
 
-<!--<div class="container">-->
-<!--<div class="row mb-2">-->
-<!--<div class="col-md-8 col-lg-8">-->
-<!--<div class="input-group">-->
-<!--<input type="text" class="form-control w-75" [(ngModel)]="newTask.title" placeholder="type task here...">-->
-<!--<input type="text" class="form-control w-25" [(ngModel)]="newTask.date" [bsValue]="newTask.date"-->
-<!--[minDate]="minDate" [maxDate]="maxDate" bsDatepicker [bsConfig]="bsConfig">-->
-<!--<div class="input-group-btn">-->
-<!--<button [disabled]="!newTask.title" class="btn pointer" (click)="addTask()">Add task</button>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->

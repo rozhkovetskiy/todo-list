@@ -1,18 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {HttpModule} from '@angular/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 
-import { AppComponent } from './app.component';
-import { ListComponent } from './list/list.component';
-import { AddTaskComponent } from './add-task/add-task.component';
+import {AppComponent} from './app.component';
+import {ListComponent} from './list/list.component';
+import {AddTaskComponent} from './add-task/add-task.component';
 
-import { AppRoutingModule } from './app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 
-import { ListService } from './shared/services/list.service';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { TaskComponent } from './task/task.component';
+import {ListService} from './shared/services/list.service';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {TaskComponent} from './task/task.component';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { TaskComponent } from './task/task.component';
     BsDatepickerModule.forRoot(),
     ReactiveFormsModule
   ],
-  providers: [ListService],
+  providers: [ListService, DatePipe],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
