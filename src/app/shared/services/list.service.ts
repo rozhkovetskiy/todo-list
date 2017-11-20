@@ -69,7 +69,8 @@ export class ListService {
     const headers = new Headers({'Content-Type': 'application/json'});
     const url = `/api/tasks/${id}`;
     this.http
-      .patch(url, taskData, {headers: headers});
+      .patch(url, taskData, {headers: headers})
+      .subscribe();
   }
 
   deleteTask(id: number): void {

@@ -37,7 +37,6 @@ export class ListComponent implements OnInit {
 
   changeTaskStatus(task: TaskModel): void {
     const taskData = {isDone: task.isDone};
-    console.log(`task data: ${JSON.stringify(taskData)}`);
     this.listService.
       changeTaskProperty(task.id, taskData);
   }
