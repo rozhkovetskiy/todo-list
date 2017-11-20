@@ -52,24 +52,12 @@
       "id": 9,
       "title": "new title 9",
       "date": "1514160000000",
-      "isDone": true
+      "isDone": false
     },
     {
       "id": 10,
       "title": "new title 10",
       "date": "1514160000000",
-      "isDone": false
-    },
-    {
-      "id": 11,
-      "title": "aaaaa",
-      "date": "1514764800000",
-      "isDone": false
-    },
-    {
-      "id": 12,
-      "title": "bbb",
-      "date": "1514764800000",
       "isDone": false
     },
     {
@@ -94,6 +82,12 @@
       "id": 16,
       "title": "asd'asdk",
       "date": "1511136000000",
+      "isDone": false
+    },
+    {
+      "id": 17,
+      "title": "acbd",
+      "date": "1514764800000",
       "isDone": false
     }
   ]

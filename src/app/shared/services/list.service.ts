@@ -65,6 +65,13 @@ export class ListService {
         });
   }
 
+  changeTaskProperty(id: number, taskData: object): void {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const url = `/api/tasks/${id}`;
+    this.http
+      .patch(url, taskData, {headers: headers});
+  }
+
   deleteTask(id: number): void {
     console.log(`id: ${id}`);
     const headers = new Headers({'Content-Type': 'application/json'});

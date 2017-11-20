@@ -1,7 +1,7 @@
 <ul class="list-group" *ngFor="let task of list.data;">
   <li class="list-group-item">
     <h6>{{task.date| date:"dd/MM/yyyy" }}</h6>
-    <input type="checkbox" [(ngModel)]="task.isDone">
+    <input type="checkbox" [(ngModel)]="task.isDone" (change)="changeTaskStatus(task)">
     <div *ngIf="editing.id !== task.id" class="task-title" [ngClass]="{'task-title-underline': task.isDone}">
       {{task.title}}
     </div>

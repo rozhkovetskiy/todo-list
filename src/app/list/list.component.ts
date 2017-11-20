@@ -35,6 +35,12 @@ export class ListComponent implements OnInit {
       .subscribe(() => this.list = this.listService.tasks );
   }
 
+  changeTaskStatus(task: TaskModel): void {
+    const taskData = {isDone: task.isDone};
+    console.log(`task data: ${JSON.stringify(taskData)}`);
+    this.listService.
+      changeTaskProperty(task.id, taskData);
+  }
 // changeTask(id: number): void {
   //   this.editing.id = id;
   //   this.editing.tempTitle = this.list[_.findIndex(this.list, {'id': id})].title;
