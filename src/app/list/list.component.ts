@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  list: TaskModel[] = [];
+  list: {data: TaskModel[]} = {data: []};
   id: number;
   private editing: {
     tempTitle: string,
@@ -25,13 +25,14 @@ export class ListComponent implements OnInit {
   getList(): void {
     this.listService
       .getList()
-      .subscribe(list => this.list = list);
+      // .subscribe(list => this.list = list);
+      .subscribe(() => this.list = this.listService.tasks);
   }
 
   getListFromDate(date) {
     this.listService
-      .getList()
-      .subscribe(() => this.list = this.listService.getListFromDate(date) );
+      .getList(date)
+      .subscribe(() => this.list = this.listService.tasks );
   }
 
 // changeTask(id: number): void {
@@ -47,10 +48,10 @@ export class ListComponent implements OnInit {
   //   this.list[_.findIndex(this.list, {'id': this.editing.id})].title = this.editing.tempTitle;
   //   this.editing.id = null;
   // }
-  //
-  // deleteTask(index: number) {
-  //   this.listService.deleteTask(this.list[index]);
-  // }
+
+  deleteTask(id: number) {
+    this.listService.deleteTask(id);
+  }
 
   ngOnInit() {
     this.route.queryParams

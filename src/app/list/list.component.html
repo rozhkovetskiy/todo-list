@@ -1,5 +1,5 @@
-<ul class="list-group" *ngFor="let task of list; let index = index">
-  <li class="list-group-item" [routerLink]="['/list/'+id+'/task',task.id]">
+<ul class="list-group" *ngFor="let task of list.data;">
+  <li class="list-group-item">
     <h6>{{task.date| date:"dd/MM/yyyy" }}</h6>
     <input type="checkbox" [(ngModel)]="task.isDone">
     <div *ngIf="editing.id !== task.id" class="task-title" [ngClass]="{'task-title-underline': task.isDone}">
@@ -13,7 +13,8 @@
       </div>
       <i *ngIf="editing.id !== task.id" class="fa fa-pencil pencil-icon pointer" aria-hidden="true"
          (click)="changeTask(task.id)"></i>
-      <i class="fa fa-trash pointer" (click)="deleteTask(index)" aria-hidden="true"></i>
+      <i class="fa fa-trash pointer" (click)="deleteTask(task.id)" aria-hidden="true"></i>
     </div>
   </li>
 </ul>
+
