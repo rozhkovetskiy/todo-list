@@ -8,11 +8,11 @@
     <input *ngIf="editing.id === task.id" type="text" class="task-title" [(ngModel)]="task.title">
     <div class="icon-block">
       <div *ngIf="editing.id === task.id" class="editing-block">
-        <i class="fa fa-check pointer" aria-hidden="true" (click)="applyChanges()"></i>
+        <i class="fa fa-check pointer" aria-hidden="true" (click)="applyChanges(task)"></i>
         <i class="fa fa-times pointer" aria-hidden="true" (click)="discardChanges()"></i>
       </div>
       <i *ngIf="editing.id !== task.id" class="fa fa-pencil pencil-icon pointer" aria-hidden="true"
-         (click)="changeTask(task.id)"></i>
+         (click)="editTaskTitle(task.id)"></i>
       <i class="fa fa-trash pointer" (click)="deleteTask(task.id)" aria-hidden="true"></i>
     </div>
   </li>

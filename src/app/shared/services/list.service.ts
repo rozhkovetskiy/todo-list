@@ -66,8 +66,8 @@ export class ListService {
   }
 
   changeTaskProperty(id: number, taskData: object): void {
-    const headers = new Headers({'Content-Type': 'application/json'});
     const url = `/api/tasks/${id}`;
+    const headers = new Headers({'Content-Type': 'application/json'});
     this.http
       .patch(url, taskData, {headers: headers})
       .subscribe();

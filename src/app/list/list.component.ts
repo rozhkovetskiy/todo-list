@@ -40,19 +40,26 @@ export class ListComponent implements OnInit {
     this.listService.
       changeTaskProperty(task.id, taskData);
   }
-// changeTask(id: number): void {
-  //   this.editing.id = id;
-  //   this.editing.tempTitle = this.list[_.findIndex(this.list, {'id': id})].title;
-  // }
-  //
-  // applyChanges(): void {
-  //   this.editing.id = null;
-  // }
-  //
-  // discardChanges(): void {
-  //   this.list[_.findIndex(this.list, {'id': this.editing.id})].title = this.editing.tempTitle;
-  //   this.editing.id = null;
-  // }
+
+  editTaskTitle(id: number): void {
+    this.editing.id = id;
+    this.editing.tempTitle = this.list.data[_.findIndex(this.list.data, {'id': id})].title;
+  }
+
+  applyChanges(task: TaskModel): void {
+    // TODO: send changed title to server
+    if (task.title !== this.editing.tempTitle) {
+      const taskData = {title: task.title};
+      this.listService.
+        changeTaskProperty(task.id, taskData);
+    }
+    this.editing.id = null;
+  }
+
+  discardChanges(): void {
+    this.list.data[_.findIndex(this.list.data, {'id': this.editing.id})].title = this.editing.tempTitle;
+    this.editing.id = null;
+  }
 
   deleteTask(id: number) {
     this.listService.deleteTask(id);
