@@ -20,26 +20,40 @@ export class ListService {
   //   return this.data;
   // }
 
+  // getList(date?: string): Observable<TaskModel[]> {
+  //   return this.http.get('/api/tasks')
+  //     .map(response => {
+  //       if (date) {
+  //         const utcDateArray = _.map(_.split(date, '-'), _.toNumber);
+  //         if (utcDateArray[1] !== 0) {
+  //           --utcDateArray[1];
+  //         }
+  //         const utcDate = (Date.UTC(utcDateArray[2], utcDateArray[1], utcDateArray[0])).toString();
+  //         this.tasks.data = _.filter(response.json(), [ 'date', utcDate]);
+  //       } else {
+  //         this.tasks.data = _.sortBy(response.json(), 'date');
+  //         console.log(this.tasks.data]);
+  //       }
+  //       return this.tasks.data;
+  //     });
+  // }
+
   getList(date?: string): Observable<TaskModel[]> {
-    return this.http.get('/api/tasks')
+    let url = `/api/tasks?_sort=date`;
+    if (date) {
+      const utcDateArray = _.map(_.split(date, '-'), _.toNumber);
+      if (utcDateArray[1] !== 0) {
+        --utcDateArray[1];
+      }
+      const utcDate = (Date.UTC(utcDateArray[2], utcDateArray[1], utcDateArray[0])).toString();
+      url += `&date_like=${utcDate}`;
+    }
+    return this.http.get(url)
       .map(response => {
-        if (date) {
-          const utcDateArray = _.map(_.split(date, '-'), _.toNumber);
-          if (utcDateArray[1] !== 0) {
-            --utcDateArray[1];
-          }
-          const utcDate = (Date.UTC(utcDateArray[2], utcDateArray[1], utcDateArray[0])).toString();
-          this.tasks.data = _.filter(response.json(), [ 'date', utcDate]);
-        } else {
-          this.tasks.data = _.sortBy(response.json(), 'date');
-        }
+        this.tasks.data = response.json();
         return this.tasks.data;
       });
   }
-
-  // reformatToDates(): any {
-  //   return _.groupBy(this.data, 'date');
-  // }
 
   getAllDates(): any {
     return _.sortBy(_.uniqWith(_.map(this.tasks.data, 'date')));
