@@ -16,10 +16,6 @@ export class ListService {
 
   constructor(private http: Http) { }
 
-  // getData() {
-  //   return this.data;
-  // }
-
   // getList(date?: string): Observable<TaskModel[]> {
   //   return this.http.get('/api/tasks')
   //     .map(response => {
@@ -45,7 +41,7 @@ export class ListService {
       if (utcDateArray[1] !== 0) {
         --utcDateArray[1];
       }
-      const utcDate = (Date.UTC(utcDateArray[2], utcDateArray[1], utcDateArray[0])).toString();
+      const utcDate = (Date.UTC(utcDateArray[2], utcDateArray[1], utcDateArray[0]));
       url += `&date_like=${utcDate}`;
     }
     return this.http.get(url)
@@ -59,17 +55,17 @@ export class ListService {
     return _.sortBy(_.uniqWith(_.map(this.tasks.data, 'date')));
   }
 
-  getListFromDate(date: string): TaskModel[] {
-    const utcDateArray = _.map(_.split(date, '-'), _.toNumber);
-    if (utcDateArray[1] !== 0) {
-      --utcDateArray[1];
-    }
-    const utcDate = (Date.UTC(utcDateArray[2], utcDateArray[1], utcDateArray[0])).toString();
-    return _.filter(this.tasks.data, [ 'date', utcDate]);
-  }
+  // No need anymore
+  // getListFromDate(date: string): TaskModel[] {
+  //   const utcDateArray = _.map(_.split(date, '-'), _.toNumber);
+  //   if (utcDateArray[1] !== 0) {
+  //     --utcDateArray[1];
+  //   }
+  //   const utcDate = (Date.UTC(utcDateArray[2], utcDateArray[1], utcDateArray[0])).toString();
+  //   return _.filter(this.tasks.data, [ 'date', utcDate]);
+  // }
 
   addTask(elem: TaskModel): void {
-    // this.data.push(elem);
      const headers = new Headers({'Content-Type': 'application/json'});
      this.http
         .post('/api/tasks', elem, {headers: headers})
@@ -81,6 +77,7 @@ export class ListService {
 
   changeTaskProperty(id: number, taskData: object): void {
     const url = `/api/tasks/${id}`;
+    const body = JSON.stringify(taskData);
     const headers = new Headers({'Content-Type': 'application/json'});
     this.http
       .patch(url, taskData, {headers: headers})
@@ -97,13 +94,4 @@ export class ListService {
         _.remove(this.tasks.data, _.find(this.tasks.data, ['id', id]));
       });
   }
-
-  // https://stackoverflow.com/questions/40774697/how-to-group-array-of-objects-by-key
-  // getAllDates(): any {
-  //   // this.getList().subscribe(() => {
-  //     console.log('list when calling getAllDates from service:' + this.data);
-  //     return _.groupBy(this.data, 'date');
-  //   // });
-  // }
-
 }

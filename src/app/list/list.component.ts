@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaskModel } from '../shared/models/task.model';
 import { ListService } from '../shared/services/list.service';
 import * as _ from 'lodash';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -47,7 +47,6 @@ export class ListComponent implements OnInit {
   }
 
   applyChanges(task: TaskModel): void {
-    // TODO: send changed title to server
     if (task.title !== this.editing.tempTitle) {
       const taskData = {title: task.title};
       this.listService.

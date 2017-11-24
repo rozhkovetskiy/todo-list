@@ -11,11 +11,16 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  dates: Date[];
+  dates: number[];
   list: TaskModel[] = [];
+  curentDate: number = this.getDateInUTC();
 
   constructor(private listService: ListService,
               private datePipe: DatePipe) { }
+
+  ngOnInit() {
+    this.getAllDates();
+  }
 
   getAllDates(): void {
     this.listService
@@ -23,11 +28,14 @@ export class DashboardComponent implements OnInit {
       .subscribe(() => this.dates = this.listService.getAllDates());
   }
 
-  ngOnInit() {
-    this.getAllDates();
-  }
-
   transformDate(date) {
     return this.datePipe.transform(date, 'dd-MM-yyyy');
+  }
+
+  getDateInUTC(date?): number {
+    if (!date) {
+      date = new Date();
+    }
+    return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
   }
 }

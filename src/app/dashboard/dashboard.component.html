@@ -10,12 +10,13 @@
     <!-- dates -->
     <div class="col-md-2 col-lg-2">
       <div class="mb-2">
-        <a class="btn btn-success w-100"routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/']">
+        <a class="btn btn-info w-100" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/']">
           All tasks
         </a>
       </div>
       <div class="mb-2" *ngFor="let date of dates">
-        <a class="btn btn-success w-100"
+        <a class="btn w-100"
+          [ngClass]="{'btn-secondary': date < curentDate, 'btn-warning': date == curentDate, 'btn-success': date > curentDate}"
           [routerLink]="['/']" routerLinkActive="active"  [queryParams]="{date: transformDate(date)}">
           {{date |  date:"dd/MM/yyyy"}}
         </a>
