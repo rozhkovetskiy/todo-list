@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TaskModel } from '../shared/models/task.model';
 import { ListService } from '../shared/services/list.service';
 import * as _ from 'lodash';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -10,30 +10,19 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  list: {data: TaskModel[]} = {data: []};
-  id: number;
-  private editing: {
+  public editing: {
     tempTitle: string,
     id: number
   } = { tempTitle: '', id: null };
+  @Input() params;
+  @Input() list;
+  @Input() getList;
 
   constructor(
     private listService: ListService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
-
-  getList(): void {
-    this.listService
-      .getList()
-      // .subscribe(list => this.list = list);
-      .subscribe(() => this.list = this.listService.tasks);
-  }
-
-  getListFromDate(date) {
-    this.listService
-      .getList(date)
-      .subscribe(() => this.list = this.listService.tasks );
-  }
 
   changeTaskStatus(task: TaskModel): void {
     const taskData = {isDone: task.isDone};
@@ -64,16 +53,11 @@ export class ListComponent implements OnInit {
     this.listService.deleteTask(id);
   }
 
-  ngOnInit() {
-    this.route.queryParams
-      .subscribe(params => {
-        if (params.date) {
-          this.getListFromDate(params.date);
-        } else {
-          this.getList();
-        }
-      });
+  pageChanged(event: any) {
+    this.params.page = event.page;
+    this.getList(this.params.date, this.params.page, this.params.limit);
   }
 
+  ngOnInit() { }
 }
 

@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import {PaginationModule} from 'ngx-bootstrap/pagination';
 
 import {AppComponent} from './app.component';
 import {ListComponent} from './list/list.component';
@@ -29,6 +30,7 @@ import {DatePipe} from '@angular/common';
     BrowserModule,
     HttpModule,
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
     ReactiveFormsModule
   ],
   providers: [ListService, DatePipe],

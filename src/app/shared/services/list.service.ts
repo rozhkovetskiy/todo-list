@@ -9,34 +9,19 @@ import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
 import { Headers } from '@angular/http';
 
+
 @Injectable()
 export class ListService {
-  // public data: TaskModel[];
   public tasks = {data: []};
-
+  public totalItems: number;
   constructor(private http: Http) { }
 
-  // getList(date?: string): Observable<TaskModel[]> {
-  //   return this.http.get('/api/tasks')
-  //     .map(response => {
-  //       if (date) {
-  //         const utcDateArray = _.map(_.split(date, '-'), _.toNumber);
-  //         if (utcDateArray[1] !== 0) {
-  //           --utcDateArray[1];
-  //         }
-  //         const utcDate = (Date.UTC(utcDateArray[2], utcDateArray[1], utcDateArray[0])).toString();
-  //         this.tasks.data = _.filter(response.json(), [ 'date', utcDate]);
-  //       } else {
-  //         this.tasks.data = _.sortBy(response.json(), 'date');
-  //         console.log(this.tasks.data]);
-  //       }
-  //       return this.tasks.data;
-  //     });
-  // }
-
-  getList(date?: string): Observable<TaskModel[]> {
+  getList(date: string, page?: number, limit?: number): Observable<TaskModel[]> {
     let url = `/api/tasks?_sort=date`;
-    if (date) {
+    if (page) {
+      url += `&_start=${(page - 1) * limit}&_limit=${limit}`;
+    }
+    if (date && date !== 'all') {
       const utcDateArray = _.map(_.split(date, '-'), _.toNumber);
       if (utcDateArray[1] !== 0) {
         --utcDateArray[1];
@@ -47,6 +32,7 @@ export class ListService {
     return this.http.get(url)
       .map(response => {
         this.tasks.data = response.json();
+        this.totalItems = +response.headers.get('X-Total-Count');
         return this.tasks.data;
       });
   }
@@ -54,16 +40,6 @@ export class ListService {
   getAllDates(): any {
     return _.sortBy(_.uniqWith(_.map(this.tasks.data, 'date')));
   }
-
-  // No need anymore
-  // getListFromDate(date: string): TaskModel[] {
-  //   const utcDateArray = _.map(_.split(date, '-'), _.toNumber);
-  //   if (utcDateArray[1] !== 0) {
-  //     --utcDateArray[1];
-  //   }
-  //   const utcDate = (Date.UTC(utcDateArray[2], utcDateArray[1], utcDateArray[0])).toString();
-  //   return _.filter(this.tasks.data, [ 'date', utcDate]);
-  // }
 
   addTask(elem: TaskModel): void {
      const headers = new Headers({'Content-Type': 'application/json'});
@@ -85,7 +61,6 @@ export class ListService {
   }
 
   deleteTask(id: number): void {
-    console.log(`id: ${id}`);
     const headers = new Headers({'Content-Type': 'application/json'});
     const url = `/api/tasks/${id}`;
     this.http

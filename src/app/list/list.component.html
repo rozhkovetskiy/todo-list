@@ -1,4 +1,4 @@
-<ul class="list-group" *ngFor="let task of list.data;">
+<ul class="list-group" *ngFor="let task of list;">
   <li class="list-group-item">
     <h6>{{task.date| date:"dd/MM/yyyy" }}</h6>
     <input type="checkbox" [(ngModel)]="task.isDone" (change)="changeTaskStatus(task)">
@@ -17,4 +17,7 @@
     </div>
   </li>
 </ul>
+<div *ngIf="params.totalItems > 10" class="mt-2">
+  <pagination [totalItems]="params.totalItems" [(ngModel)]="params.page" (pageChanged)="pageChanged($event)"></pagination>
+</div>
 
