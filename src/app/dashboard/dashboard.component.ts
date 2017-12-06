@@ -14,9 +14,9 @@ import {DatePipe} from '@angular/common';
 export class DashboardComponent implements OnInit {
   public dates: number[];
   public list: TaskModel[];
-  currentDate: number = this.getDateInUTC();
   // TODO inteface for params
   public params: any;
+  private currentDate: number = this.getDateInUTC();
 
   constructor(
               private listService: ListService,
