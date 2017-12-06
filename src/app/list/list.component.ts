@@ -14,6 +14,7 @@ export class ListComponent implements OnInit {
     tempTitle: string,
     id: number
   } = { tempTitle: '', id: null };
+
   @Input() params;
   @Input() list;
   @Input() getList;
@@ -32,7 +33,7 @@ export class ListComponent implements OnInit {
 
   public editTaskTitle(id: number): void {
     this.editing.id = id;
-    this.editing.tempTitle = this.list.data[_.findIndex(this.list.data, {'id': id})].title;
+    this.editing.tempTitle = this.list[_.findIndex(this.list, {'id': id})].title;
   }
 
   public applyChanges(task: TaskModel): void {
@@ -45,7 +46,7 @@ export class ListComponent implements OnInit {
   }
 
   public discardChanges(): void {
-    this.list.data[_.findIndex(this.list.data, {'id': this.editing.id})].title = this.editing.tempTitle;
+    this.list[_.findIndex(this.list, {'id': this.editing.id})].title = this.editing.tempTitle;
     this.editing.id = null;
   }
 
