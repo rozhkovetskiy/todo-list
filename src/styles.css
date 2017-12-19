@@ -6,3 +6,8 @@
 .pointer {
   cursor: pointer;
 }
+
+pagination-controls ul {
+  margin-top: 10px;
+  padding-left: 0;
+}
