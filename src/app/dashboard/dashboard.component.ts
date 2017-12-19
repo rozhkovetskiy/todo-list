@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {TaskModel} from '../shared/models/task.model';
 import {ListService} from '../shared/services/list.service';
 import {DatePipe} from '@angular/common';
-// import {de} from 'ngx-bootstrap/locale';
 
 @Component({
   selector: 'app-dates',
@@ -82,8 +81,17 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getDates();
-    this.getList(this.params.date, this.params.page, this.params.limit);
+    this.route.queryParams
+      .subscribe((params) => {
+        if (params.date !== this.params.date) {
+          this.params.date = params.date;
+        }
+        if (params.page !== this.params.page) {
+          this.params.page = params.page;
+        }
+        this.getDates();
+        this.getList(this.params.date, this.params.page, this.params.limit);
+      });
   }
 }
 
