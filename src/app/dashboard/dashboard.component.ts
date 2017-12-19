@@ -1,10 +1,3 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-
-import {TaskModel} from '../shared/models/task.model';
-import {ListService} from '../shared/services/list.service';
-import {DatePipe} from '@angular/common';
-
 @Component({
   selector: 'app-dates',
   templateUrl: './dashboard.component.html',
@@ -18,10 +11,10 @@ export class DashboardComponent implements OnInit {
   private currentDate: number = this.getDateInUTC();
 
   constructor(
-              private listService: ListService,
-              private datePipe: DatePipe,
-              private route: ActivatedRoute,
-              private router: Router
+    private listService: ListService,
+    private datePipe: DatePipe,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.params = {
       date: 'all',
@@ -43,9 +36,10 @@ export class DashboardComponent implements OnInit {
   }
 
   public goToDate(date?: Date) {
-    this.params = {page: 1, limit: 10, date: null};
+    this.params.page = 1;
     (date) ? (this.params.date = this.transformDate(date)) : (this.params.date = 'all');
-    this.router.navigate([], {queryParams: this.params, relativeTo: this.route});
+    const routerParams = {date: this.params.date, page: this.params.page};
+    this.router.navigate([], {queryParams: routerParams, relativeTo: this.route});
     this.getList(this.params.date, this.params.page, this.params.limit);
   }
 
@@ -82,15 +76,22 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe((params) => {
-        if (params.date !== this.params.date) {
+        if (params.date && params.date !== this.params.date) {
           this.params.date = params.date;
         }
-        if (params.page !== this.params.page) {
-          this.params.page = params.page;
+        if (params.page && +params.page !==  this.params.page) {
+          this.params.page = +params.page;
         }
         this.getDates();
         this.getList(this.params.date, this.params.page, this.params.limit);
       });
   }
 }
+import { Component, OnInit } from '@angular/core';
+
+import {ActivatedRoute, Router} from '@angular/router';
+import {TaskModel} from '../shared/models/task.model';
+import {ListService} from '../shared/services/list.service';
+
+import {DatePipe} from '@angular/common';
 

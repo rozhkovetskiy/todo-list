@@ -10,15 +10,12 @@
     <!-- dates -->
     <div class="col-md-2 col-lg-2">
       <div class="mb-2">
-        <a class="btn btn-info w-100" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
-           (click)="goToDate()">
-          All tasks
-        </a>
+        <a class="btn btn-info w-100" (click)="goToDate()">All tasks</a>
       </div>
       <div class="mb-2" *ngFor="let date of dates">
         <a class="btn w-100"
-          [ngClass]="setButtonClass(date)"
-          (click)="goToDate(date)">
+           [ngClass]="setButtonClass(date)"
+           (click)="goToDate(date)">
           {{date |  date:"dd/MM/yyyy"}}
         </a>
       </div>
