@@ -4,10 +4,16 @@ import { Http } from '@angular/http';
 import { TaskModel } from '../models/task.model';
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/pluck';
+import 'rxjs/add/operator/distinct';
+import 'rxjs/add/operator/concatMap';
+import 'rxjs/add/operator/toArray';
+import 'rxjs/add/observable/from';
 import { Observable } from 'rxjs/Observable';
 
 import * as _ from 'lodash';
 import { Headers } from '@angular/http';
+import 'rxjs/add/operator/distinct';
 
 
 @Injectable()
@@ -37,8 +43,14 @@ export class ListService {
       });
   }
 
-  getAllDates(): any {
-    return _.sortBy(_.uniqWith(_.map(this.tasks.data, 'date')));
+  getDates(): any {
+    const url = '/api/tasks?_sort=date';
+    return this.http.get(url)
+      .map((response) => response.json() as TaskModel[])
+      .concatMap((arr) => Observable.from(arr))
+      .pluck('date')
+      .distinct()
+      .toArray();
   }
 
   addTask(elem: TaskModel): void {
@@ -56,7 +68,7 @@ export class ListService {
     const body = JSON.stringify(taskData);
     const headers = new Headers({'Content-Type': 'application/json'});
     this.http
-      .patch(url, taskData, {headers: headers})
+      .patch(url, body, {headers: headers})
       .subscribe();
   }
 
@@ -65,7 +77,7 @@ export class ListService {
     const url = `/api/tasks/${id}`;
     this.http
       .delete(url, {headers: headers})
-      .subscribe((response) => {
+      .subscribe(() => {
         _.remove(this.tasks.data, _.find(this.tasks.data, ['id', id]));
       });
   }

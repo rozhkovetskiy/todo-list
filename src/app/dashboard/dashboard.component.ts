@@ -13,6 +13,7 @@ import {DatePipe} from '@angular/common';
 })
 export class DashboardComponent implements OnInit {
   public dates: number[];
+  public forDate: TaskModel[];
   public list: TaskModel[];
   // TODO inteface for params
   public params: any;
@@ -68,18 +69,21 @@ export class DashboardComponent implements OnInit {
     return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
   }
 
-  private getAllDates(): void {
-    this.listService
-      .getList('all')
-      .subscribe(() => this.dates = this.listService.getAllDates());
-  }
-
   private transformDate(date) {
     return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 
+  private getDates(): void {
+    this.listService
+      .getDates()
+      .subscribe((response) => {
+        this.dates = response;
+      });
+  }
+
   ngOnInit() {
-    this.getAllDates();
+    this.getDates();
     this.getList(this.params.date, this.params.page, this.params.limit);
   }
 }
+
