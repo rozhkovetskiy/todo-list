@@ -1,3 +1,11 @@
+import { Component, OnInit } from '@angular/core';
+
+import { ActivatedRoute, Router } from '@angular/router';
+import { TaskModel } from '../shared/models/task.model';
+import { ListService } from '../shared/services/list.service';
+
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-dates',
   templateUrl: './dashboard.component.html',
@@ -27,6 +35,7 @@ export class DashboardComponent implements OnInit {
 
 
   public getList(date: string, page: number, limit: number) {
+    console.log('get list works');
     this.listService
       .getList(date, page, limit)
       .subscribe((response) => {
@@ -40,7 +49,6 @@ export class DashboardComponent implements OnInit {
     (date) ? (this.params.date = this.transformDate(date)) : (this.params.date = 'all');
     const routerParams = {date: this.params.date, page: this.params.page};
     this.router.navigate([], {queryParams: routerParams, relativeTo: this.route});
-    this.getList(this.params.date, this.params.page, this.params.limit);
   }
 
   public setButtonClass(date: any) {
@@ -82,16 +90,8 @@ export class DashboardComponent implements OnInit {
         if (params.page && +params.page !==  this.params.page) {
           this.params.page = +params.page;
         }
-        this.getDates();
         this.getList(this.params.date, this.params.page, this.params.limit);
       });
+    this.getDates();
   }
 }
-import { Component, OnInit } from '@angular/core';
-
-import {ActivatedRoute, Router} from '@angular/router';
-import {TaskModel} from '../shared/models/task.model';
-import {ListService} from '../shared/services/list.service';
-
-import {DatePipe} from '@angular/common';
-

@@ -1,14 +1,14 @@
 <div class="container">
   <!--add task-->
   <div class="row mb-2">
-    <div class="col-md-10 offset-md-2">
+    <div class="col-md-9 col-lg-10 offset-md-3 offset-lg-2">
       <app-add-task></app-add-task>
     </div>
   </div>
 
   <div class="row">
     <!-- dates -->
-    <div class="col-md-2 col-lg-2">
+    <div class="col-md-3 col-lg-2">
       <div class="mb-2">
         <a class="btn btn-info w-100" (click)="goToDate()">All tasks</a>
       </div>
@@ -21,11 +21,10 @@
       </div>
     </div>
     <!-- tasks -->
-    <div class="col-md-10 col-lg-10">
+    <div class="col-md-9 col-lg-10">
       <app-list [params]="params"
-                [list]="list"
-                [getList]="getList.bind(this)"
-      ></app-list>
+                [list]="list">
+      </app-list>
     </div>
   </div>
 </div>
