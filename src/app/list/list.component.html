@@ -1,5 +1,5 @@
-<ul class="list-group" *ngFor="let task of list;">
-  <li class="list-group-item">
+<ul class="list-group">
+  <li class="list-group-item"  *ngFor="let task of list | paginate: {itemsPerPage: params.limit, currentPage: params.page, totalItems: params.totalItems}">
     <h6>{{task.date| date:"dd/MM/yyyy" }}</h6>
     <input type="checkbox" [(ngModel)]="task.isDone" (change)="changeTaskStatus(task)">
     <div *ngIf="editing.id !== task.id" class="task-title" [ngClass]="{'task-title-underline': task.isDone}">
@@ -17,7 +17,7 @@
     </div>
   </li>
 </ul>
-<div *ngIf="params.totalItems > 10" class="mt-2">
-  <pagination [totalItems]="params.totalItems" [(ngModel)]="params.page" (pageChanged)="pageChanged($event)"></pagination>
-</div>
-
+<pagination-controls (pageChange)="params.page = $event"
+                     autoHide="true"
+                     previousLabel="Prev">
+</pagination-controls>

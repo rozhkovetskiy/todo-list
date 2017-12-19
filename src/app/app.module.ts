@@ -3,13 +3,13 @@ import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
-import {PaginationModule} from 'ngx-bootstrap/pagination';
 
-import {AppComponent} from './app.component';
+import {AppComponent} from './main/app.component';
 import {ListComponent} from './list/list.component';
 import {AddTaskComponent} from './add-task/add-task.component';
 
 import {AppRoutingModule} from './app-routing.module';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import {ListService} from './shared/services/list.service';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -30,7 +30,7 @@ import {DatePipe} from '@angular/common';
     BrowserModule,
     HttpModule,
     BsDatepickerModule.forRoot(),
-    PaginationModule.forRoot(),
+    NgxPaginationModule,
     ReactiveFormsModule
   ],
   providers: [ListService, DatePipe],

@@ -12,7 +12,6 @@ import {DatePipe} from '@angular/common';
 })
 export class DashboardComponent implements OnInit {
   public dates: number[];
-  public forDate: TaskModel[];
   public list: TaskModel[];
   // TODO inteface for params
   public params: any;
