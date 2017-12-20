@@ -1,10 +1,17 @@
 <form [formGroup]="addTaskForm">
   <div class="input-group">
-    <input type="text" class="form-control w-75" formControlName="title" placeholder="type task here..."
+    <input type="text" class="form-control input-task" formControlName="title" placeholder="type task here..."
     [class.is-invalid]="addTaskForm.get('title').hasError('required') && addTaskForm.get('title').dirty">
-    <input type="text" class="form-control w-25" formControlName="date" bsDatepicker
-           [class.is-invalid]="addTaskForm.get('date').hasError('required')"
-           [minDate]="minDate" [maxDate]="maxDate" [bsConfig]="bsConfig">
+    <!--<input type="text" class="form-control w-25" formControlName="date" bsDatepicker-->
+           <!--[class.is-invalid]="addTaskForm.get('date').hasError('required')"-->
+           <!--[minDate]="minDate" [maxDate]="maxDate" [bsConfig]="bsConfig">-->
+    <input class="form-control" placeholder="Select a date" ngx-mydatepicker name="myDate"
+           formControlName="myDate" [options]="myOptions" #dp="ngx-mydatepicker"/>
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-def" (click)="dp.toggleCalendar()">
+          <span class="oi oi-calendar"></span>
+        </button>
+      </span>
     <div class="input-group-btn">
       <button [disabled]="!addTaskForm.valid" class="btn btn-info pointer" (click)="addTask(addTaskForm.value)">Add task</button>
     </div>

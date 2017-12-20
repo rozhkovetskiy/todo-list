@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListService } from '../shared/services/list.service';
 import { TaskModel } from '../shared/models/task.model';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import {INgxMyDpOptions, IMyDateModel} from 'ngx-mydatepicker';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {DatePipe} from '@angular/common';
@@ -16,12 +16,15 @@ import * as _ from 'lodash';
 })
 
 export class AddTaskComponent implements OnInit {
-  bsConfig: Partial<BsDatepickerConfig>;
+  d = new Date();
   newTask: TaskModel = new TaskModel();
   paramsDate: string;
-  minDate = new Date();
-  maxDate = new Date(2099, 11, 31);
   addTaskForm: FormGroup;
+  myOptions: INgxMyDpOptions = {
+    dateFormat: 'd/m/yyyy',
+    disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate() - 1}
+  };
+
 
   constructor(
     private listService: ListService,
@@ -34,7 +37,6 @@ export class AddTaskComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.bsConfig = Object.assign({}, {containerClass: 'theme-green'});
     this.route.queryParams
       .subscribe((params) => this.paramsDate = params.date);
   }
@@ -42,30 +44,33 @@ export class AddTaskComponent implements OnInit {
   createForm() {
     this.addTaskForm = this.fb.group({
       title: ['', Validators.required ],
-      date: [new Date(), Validators.required ]
+      myDate: [{jsdate: new Date()}, Validators.required]
     });
   }
 
   addTask(task) {
+    console.log(task.myDate.epoc * 1000);
     this.newTask.title = task.title;
-    this.newTask.date = this.getDateInUTC(task.date);
+    // convert to utc
+    this.newTask.date = task.myDate.epoc * 1000;
     this.listService
       .addTask(this.newTask);
-    if (this.newTask.date !== this.convertStringDateToUTC(this.paramsDate)) {
-      const params = {date: this.transformDate(task.date)};
-      this.router.navigate([], {queryParams: params, relativeTo: this.route} );
-    }
+    // navigate to current date tasks.
+    // if (this.newTask.date !== this.convertStringDateToUTC(this.paramsDate)) {
+    //   const params = {date: this.transformDate(task.date)};
+    //   this.router.navigate([], {queryParams: params, relativeTo: this.route} );
+    // }
     this.newTask = new TaskModel;
   }
 
 
 
-  private getDateInUTC(date?): number {
-    if (!date) {
-      date = new Date();
-    }
-    return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  }
+  // private getDateInUTC(date?): number {
+  //   if (!date) {
+  //     date = new Date();
+  //   }
+  //   return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  // }
 
   transformDate(date) {
     return this.datePipe.transform(date, 'dd-MM-yyyy');

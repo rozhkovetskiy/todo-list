@@ -35,7 +35,6 @@ export class DashboardComponent implements OnInit {
 
 
   public getList(date: string, page: number, limit: number) {
-    console.log('get list works');
     this.listService
       .getList(date, page, limit)
       .subscribe((response) => {

@@ -54,7 +54,6 @@ export class ListComponent implements OnInit {
   }
 
   public pageChanged(event: any) {
-    console.log('in page changed');
     this.params.page = event;
     const routerParams = {date: this.params.date, page: this.params.page};
     this.router.navigate([], {queryParams: routerParams, relativeTo: this.route});
