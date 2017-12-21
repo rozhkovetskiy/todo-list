@@ -1,69 +1,45 @@
 {
   "tasks": [
     {
-      "id": 14,
-      "title": "aaaaaaa",
-      "date": 1510790400000,
+      "id": 1,
+      "title": "first task for 21.12.2017",
+      "date": 1513814400000,
       "isDone": false
     },
     {
-      "id": 15,
-      "title": "aaaa",
-      "date": 1511136000000,
+      "id": 2,
+      "title": "second task for 21.12.2017",
+      "date": 1513814400000,
       "isDone": false
     },
     {
-      "id": 16,
-      "title": "asdasdk",
-      "date": 1511136000000,
+      "id": 3,
+      "title": "first task for 23.12.2017",
+      "date": 1513987200000,
       "isDone": false
     },
     {
-      "id": 17,
-      "title": "acbd",
+      "id": 4,
+      "title": "first task for 1.1.2017",
+      "date": 1483228800000,
+      "isDone": false
+    },
+    {
+      "id": 5,
+      "title": "second task for 1.1.2017",
+      "date": 1483228800000,
+      "isDone": false
+    },
+    {
+      "id": 6,
+      "title": "third task for 1.1.2017",
+      "date": 1483228800000,
+      "isDone": false
+    },
+    {
+      "id": 7,
+      "title": "first task for 1.1.2018",
       "date": 1514764800000,
-      "isDone": true
-    },
-    {
-      "id": 18,
-      "title": "new title 9",
-      "date": 1514246400000,
-      "isDone": false
-    },
-    {
-      "id": 19,
-      "title": "asap",
-      "date": 1511481600000,
-      "isDone": false
-    },
-    {
-      "id": 20,
-      "title": "asapw",
-      "date": 1511481600000,
-      "isDone": false
-    },
-    {
-      "id": 21,
-      "title": "aa",
-      "date": 1511481600000,
-      "isDone": false
-    },
-    {
-      "id": 22,
-      "title": "aaaa",
-      "date": 1511568000000,
-      "isDone": false
-    },
-    {
-      "id": 23,
-      "title": "first task for 1.1.19",
-      "date": 1546290000,
-      "isDone": false
-    },
-    {
-      "id": 24,
-      "title": "second task for 1.1.19",
-      "date": 1546290000000,
       "isDone": false
     }
   ]

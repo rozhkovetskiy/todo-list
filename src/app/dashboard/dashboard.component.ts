@@ -4,8 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TaskModel } from '../shared/models/task.model';
 import { ListService } from '../shared/services/list.service';
 
-import { DatePipe } from '@angular/common';
-
 @Component({
   selector: 'app-dates',
   templateUrl: './dashboard.component.html',
@@ -16,11 +14,9 @@ export class DashboardComponent implements OnInit {
   public list: TaskModel[];
   // TODO inteface for params
   public params: any;
-  private currentDate: number = this.getDateInUTC();
 
   constructor(
     private listService: ListService,
-    private datePipe: DatePipe,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -45,31 +41,21 @@ export class DashboardComponent implements OnInit {
 
   public goToDate(date?: Date) {
     this.params.page = 1;
-    (date) ? (this.params.date = this.transformDate(date)) : (this.params.date = 'all');
+    (date) ? (this.params.date = this.listService.transformDate(date)) : (this.params.date = 'all');
     const routerParams = {date: this.params.date, page: this.params.page};
     this.router.navigate([], {queryParams: routerParams, relativeTo: this.route});
   }
 
   public setButtonClass(date: any) {
+    const currentDate = this.listService.getDateInUTC();
     date = parseInt(date, 10);
-    if (date < this.currentDate) {
+    if (date < currentDate) {
       return 'btn-secondary';
-    } else if (date > this.currentDate) {
+    } else if (date > currentDate) {
       return 'btn-success';
     } else {
       return 'btn-warning';
     }
-  }
-
-  private getDateInUTC(date?): number {
-    if (!date) {
-      date = new Date();
-    }
-    return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  }
-
-  private transformDate(date) {
-    return this.datePipe.transform(date, 'dd-MM-yyyy');
   }
 
   private getDates(): void {

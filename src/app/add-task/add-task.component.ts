@@ -4,7 +4,6 @@ import { TaskModel } from '../shared/models/task.model';
 import { IMyDpOptions } from 'mydatepicker';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {DatePipe} from '@angular/common';
 
 import * as _ from 'lodash';
 
@@ -22,7 +21,7 @@ export class AddTaskComponent implements OnInit {
   addTaskForm: FormGroup;
   myOptions: IMyDpOptions = {
     dateFormat: 'd/m/yyyy',
-    disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate() - 1},
+    // disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate() - 1},
     height: '38px'
   };
 
@@ -32,7 +31,6 @@ export class AddTaskComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private datePipe: DatePipe,
   ) {
       this.createForm();
 
@@ -50,39 +48,16 @@ export class AddTaskComponent implements OnInit {
   }
 
   addTask(task) {
-    console.log(task.myDate);
-    // this.newTask.title = task.title;
-    // // convert to utc
-    // this.newTask.date = task.myDate.epoc * 1000;
-    // this.listService
-    //   .addTask(this.newTask);
+    this.newTask.title = task.title;
+    this.newTask.date = this.listService.getDateInUTC(task.myDate.jsdate);
+    this.listService
+      .addTask(this.newTask);
     // navigate to current date tasks.
     // if (this.newTask.date !== this.convertStringDateToUTC(this.paramsDate)) {
     //   const params = {date: this.transformDate(task.date)};
     //   this.router.navigate([], {queryParams: params, relativeTo: this.route} );
     // }
-    // this.newTask = new TaskModel;
-  }
-
-
-
-  // private getDateInUTC(date?): number {
-  //   if (!date) {
-  //     date = new Date();
-  //   }
-  //   return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  // }
-
-  transformDate(date) {
-    return this.datePipe.transform(date, 'dd-MM-yyyy');
-  }
-
-  private convertStringDateToUTC (date: string): number {
-    const utcDateArray = _.map(_.split(date, '-'), _.toNumber);
-    if (utcDateArray[1] !== 0) {
-      --utcDateArray[1];
-    }
-    return Date.UTC(utcDateArray[2], utcDateArray[1], utcDateArray[0]);
+    this.newTask = new TaskModel;
   }
 }
 

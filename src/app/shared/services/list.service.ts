@@ -15,12 +15,16 @@ import * as _ from 'lodash';
 import { Headers } from '@angular/http';
 import 'rxjs/add/operator/distinct';
 
+import { DatePipe } from '@angular/common';
+
+
 
 @Injectable()
 export class ListService {
   public tasks = {data: []};
   public totalItems: number;
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+              private datePipe: DatePipe) { }
 
   getList(date: string, page?: number, limit?: number): Observable<TaskModel[]> {
     let url = `/api/tasks?_sort=date`;
@@ -28,11 +32,7 @@ export class ListService {
       url += `&_start=${(page - 1) * limit}&_limit=${limit}`;
     }
     if (date && date !== 'all') {
-      const utcDateArray = _.map(_.split(date, '-'), _.toNumber);
-      if (utcDateArray[1] !== 0) {
-        --utcDateArray[1];
-      }
-      const utcDate = (Date.UTC(utcDateArray[2], utcDateArray[1], utcDateArray[0]));
+      const utcDate = (this.convertStringDateToUTC(date));
       url += `&date_like=${utcDate}`;
     }
     return this.http.get(url)
@@ -80,5 +80,24 @@ export class ListService {
       .subscribe(() => {
         _.remove(this.tasks.data, _.find(this.tasks.data, ['id', id]));
       });
+  }
+
+  getDateInUTC(date?): number {
+    if (!date) {
+      date = new Date();
+    }
+    return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  }
+
+  transformDate(date) {
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
+  }
+
+  convertStringDateToUTC (date: string): number {
+    const utcDateArray = _.map(_.split(date, '-'), _.toNumber);
+    if (utcDateArray[1] !== 0) {
+      --utcDateArray[1];
+    }
+    return Date.UTC(utcDateArray[2], utcDateArray[1], utcDateArray[0]);
   }
 }
