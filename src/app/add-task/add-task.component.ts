@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListService } from '../shared/services/list.service';
 import { TaskModel } from '../shared/models/task.model';
-import {INgxMyDpOptions, IMyDateModel} from 'ngx-mydatepicker';
+import { IMyDpOptions } from 'mydatepicker';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {DatePipe} from '@angular/common';
@@ -20,9 +20,10 @@ export class AddTaskComponent implements OnInit {
   newTask: TaskModel = new TaskModel();
   paramsDate: string;
   addTaskForm: FormGroup;
-  myOptions: INgxMyDpOptions = {
+  myOptions: IMyDpOptions = {
     dateFormat: 'd/m/yyyy',
-    disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate() - 1}
+    disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate() - 1},
+    height: '38px'
   };
 
 
@@ -49,18 +50,18 @@ export class AddTaskComponent implements OnInit {
   }
 
   addTask(task) {
-    console.log(task.myDate.epoc * 1000);
-    this.newTask.title = task.title;
-    // convert to utc
-    this.newTask.date = task.myDate.epoc * 1000;
-    this.listService
-      .addTask(this.newTask);
+    console.log(task.myDate);
+    // this.newTask.title = task.title;
+    // // convert to utc
+    // this.newTask.date = task.myDate.epoc * 1000;
+    // this.listService
+    //   .addTask(this.newTask);
     // navigate to current date tasks.
     // if (this.newTask.date !== this.convertStringDateToUTC(this.paramsDate)) {
     //   const params = {date: this.transformDate(task.date)};
     //   this.router.navigate([], {queryParams: params, relativeTo: this.route} );
     // }
-    this.newTask = new TaskModel;
+    // this.newTask = new TaskModel;
   }
 
 

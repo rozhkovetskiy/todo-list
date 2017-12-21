@@ -9,7 +9,7 @@ import {AddTaskComponent} from './add-task/add-task.component';
 
 import {AppRoutingModule} from './app-routing.module';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
+import { MyDatePickerModule } from 'mydatepicker';
 
 import {ListService} from './shared/services/list.service';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -29,7 +29,7 @@ import {DatePipe} from '@angular/common';
     FormsModule,
     BrowserModule,
     HttpModule,
-    NgxMyDatePickerModule.forRoot(),
+    MyDatePickerModule,
     NgxPaginationModule,
     ReactiveFormsModule
   ],

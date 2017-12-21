@@ -11,21 +11,14 @@ pagination-controls ul {
   padding-left: 0;
 }
 
-.btn-def {
-  border: 1px solid #ccc;
+
+.mydp,
+.mydp .headertodaybtn,
+.mydp .selection,
+.mydp .selectiongroup,
+.mydp .selector {
+  border-radius: 0 !important;
 }
 
-.input-task {
-  flex-grow: 4 !important;
-}
-.ngxmdp{
-  position: relative !important;
-}
-.ngxmdp .selectorarrow{
-  left: -175px !important;
-}
-@media screen and (max-width: 1024px){
-  .ngxmdp .selectorarrow{
-    left: -100px !important;
-  }
-}
+
+
