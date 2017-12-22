@@ -21,7 +21,7 @@ export class AddTaskComponent implements OnInit {
   addTaskForm: FormGroup;
   myOptions: IMyDpOptions = {
     dateFormat: 'd/m/yyyy',
-    // disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate() - 1},
+    disableUntil: {year: this.d.getFullYear(), month: this.d.getMonth() + 1, day: this.d.getDate() - 1},
     height: '38px'
   };
 
@@ -58,6 +58,7 @@ export class AddTaskComponent implements OnInit {
     //   this.router.navigate([], {queryParams: params, relativeTo: this.route} );
     // }
     this.newTask = new TaskModel;
+    this.addTaskForm.controls['title'].reset();
   }
 }
 

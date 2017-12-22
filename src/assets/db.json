@@ -4,13 +4,13 @@
       "id": 1,
       "title": "first task for 21.12.2017",
       "date": 1513814400000,
-      "isDone": false
+      "isDone": true
     },
     {
       "id": 2,
       "title": "second task for 21.12.2017",
       "date": 1513814400000,
-      "isDone": false
+      "isDone": true
     },
     {
       "id": 3,
@@ -40,6 +40,24 @@
       "id": 7,
       "title": "first task for 1.1.2018",
       "date": 1514764800000,
+      "isDone": false
+    },
+    {
+      "id": 8,
+      "title": "other task for \"today\"",
+      "date": 1513814400000,
+      "isDone": false
+    },
+    {
+      "id": 9,
+      "title": "each other task for \"today\"",
+      "date": 1513814400000,
+      "isDone": false
+    },
+    {
+      "id": 10,
+      "title": "24.12.17 task",
+      "date": 1514073600000,
       "isDone": false
     }
   ]

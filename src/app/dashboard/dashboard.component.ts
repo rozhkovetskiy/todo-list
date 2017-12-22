@@ -46,16 +46,31 @@ export class DashboardComponent implements OnInit {
     this.router.navigate([], {queryParams: routerParams, relativeTo: this.route});
   }
 
+
   public setButtonClass(date: any) {
+    let activeClass = '';
+
+    if (date === 'all') {
+      activeClass = 'btn-info';
+      if (date === this.params.date) {
+        activeClass += ' active';
+      }
+      return activeClass;
+    }
+
     const currentDate = this.listService.getDateInUTC();
     date = parseInt(date, 10);
     if (date < currentDate) {
-      return 'btn-secondary';
+      activeClass = 'btn-secondary';
     } else if (date > currentDate) {
-      return 'btn-success';
+      activeClass = 'btn-success';
     } else {
-      return 'btn-warning';
+      activeClass = 'btn-warning';
     }
+    if (date === this.listService.convertStringDateToUTC(this.params.date)) {
+      activeClass += ' active';
+    }
+    return activeClass;
   }
 
   private getDates(): void {
