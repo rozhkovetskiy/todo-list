@@ -17,6 +17,7 @@ export class ListComponent implements OnInit {
 
   @Input() params;
   @Input() list;
+  @Input() dates;
 
   constructor(
     private listService: ListService,
@@ -50,6 +51,14 @@ export class ListComponent implements OnInit {
   }
 
   public deleteTask(id: number) {
+    if (this.list.length === 1 ) {
+      // go to all tasks
+      const routerParams = {date: 'all', page: 1};
+      this.router.navigate([], {queryParams: routerParams, relativeTo: this.route});
+      // remove this date from dates array
+      _.pull(this.dates, this.listService.convertStringDateToUTC(this.params.date));
+      console.log();
+    }
     this.listService.deleteTask(id);
   }
 
