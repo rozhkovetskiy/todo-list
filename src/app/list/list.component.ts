@@ -56,7 +56,9 @@ export class ListComponent implements OnInit {
       const routerParams = {date: 'all', page: 1};
       this.router.navigate([], {queryParams: routerParams, relativeTo: this.route});
       // remove this date from dates array
-      _.pull(this.dates, this.listService.convertStringDateToUTC(this.params.date));
+      if (this.params.date !== 'all') {
+        _.pull(this.dates, this.listService.convertStringDateToUTC(this.params.date));
+      }
       console.log();
     }
     this.listService.deleteTask(id);
