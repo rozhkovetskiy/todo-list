@@ -12,7 +12,6 @@ import { ListService } from '../shared/services/list.service';
 export class DashboardComponent implements OnInit {
   public dates: number[];
   public list: TaskModel[];
-  // TODO inteface for params
   public params: any;
 
   constructor(

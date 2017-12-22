@@ -2,7 +2,9 @@
   <!--add task-->
   <div class="row mb-2">
     <div class="col-md-9 col-lg-10 offset-md-3 offset-lg-2">
-      <app-add-task></app-add-task>
+      <app-add-task [params]="params"
+                    [dates]="dates">
+      </app-add-task>
     </div>
   </div>
 

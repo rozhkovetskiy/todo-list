@@ -59,7 +59,6 @@ export class ListComponent implements OnInit {
       if (this.params.date !== 'all') {
         _.pull(this.dates, this.listService.convertStringDateToUTC(this.params.date));
       }
-      console.log();
     }
     this.listService.deleteTask(id);
   }
